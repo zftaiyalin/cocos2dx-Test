@@ -1,0 +1,68 @@
+{
+    "builds": [
+               {
+               "productTime": 20,
+               "id": 1111,
+               "name": "耕地",
+               "productNum": 10,
+               "isShowMaxNum": 0,
+               "num":0,
+               "isShowNum": 1,
+               "grade":1,
+               "isMax":0
+               },
+               {
+               "productTime": 20,
+               "id": 1112,
+               "name": "采石场",
+               "productNum": 10,
+               "isShowMaxNum": 1,
+               "num":0,
+               "isShowNum": 0,
+               "grade":1,
+               "isMax":0
+               },
+               {
+               "productTime": 20,
+               "productNum": 10,
+               "isShowNum": 0,
+               "id": 1113,
+               "isShowMaxNum": 0,
+               "name": "磨坊",
+               "num":0,
+               "grade":1,
+               "isMax":1
+               },
+               {
+               "productTime": 0,
+               "productNum": 0,
+               "isShowMaxNum": 0,
+               "isShowNum": 0,
+               "id": 1114,
+               "name": "居屋",
+               "num":0,
+               "grade":1,
+               "isMax":1
+               }
+               ],
+    "Resources":[
+                 {
+                 "id": 11111,
+                 "name": "人口",
+                 "num":5,
+                 "isShow":true
+                 },
+                 {
+                 "id": 11112,
+                 "name": "小麦",
+                 "num":10,
+                 "isShow":true
+                 },
+                 {
+                 "id": 11113,
+                 "name": "石头",
+                 "num":20,
+                 "isShow":true
+                 }
+                 ]
+}
