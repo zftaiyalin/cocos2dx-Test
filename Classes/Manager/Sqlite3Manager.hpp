@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
-//#include "VKBaseManager.h"
+#include "BuildModel.hpp"
 #include "ResourcesModel.hpp"
 #include "sqlite3.h"
 
@@ -44,8 +44,13 @@ public:
     
     
     bool addOrUpdateResourcesDataInTable(ResourcesModel *model);//添加或修改资源到资源表格
-    bool updateResourcesDataInTable(ResourcesModel *model);//修改资源表格资源
+//    bool updateResourcesDataInTable(ResourcesModel *model);//修改资源表格资源
+    
+    bool addOrUpdateBuildDataInTable(BuildModel *model);//添加或修改建筑到建筑表格
+//    bool updateBuildDataInTable(BuildModel *model);//修改建筑表格资源
+    
     cocos2d::Vector<ResourcesModel*> selectResourcesModelList();
+    cocos2d::Vector<BuildModel*> selectBuildModelList();
     
     void selectTest();
 protected:

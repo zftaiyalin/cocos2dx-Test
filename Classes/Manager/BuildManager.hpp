@@ -11,10 +11,16 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
+#include <json/document.h>
+#include "Sqlite3Manager.hpp"
+#include "BuildModel.hpp"
+
 class BuildManager : public cocos2d::Ref
 {
     public:
         static BuildManager* getInstance();
+        void loadBuildData();
+        cocos2d::Vector<BuildModel *> buildVec;
 protected:
     BuildManager();
     virtual ~BuildManager();

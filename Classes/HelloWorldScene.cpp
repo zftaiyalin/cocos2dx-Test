@@ -34,27 +34,27 @@ bool HelloWorld::init()
 //    cocos2d::Vector<ResourcesModel *> resVec;
     
 //    cocos2d::Vector<ResourcesModel *> resVec = ResourcesManager::getInstance()->resVec;
-    auto resManager = ResourcesManager::getInstance();
-    resManager->loadResourcesData();
+    ResourcesManager::getInstance()->loadResourcesData();
+    BuildManager::getInstance()->loadBuildData();  
     
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    
+    
+//    // add "HelloWorld" splash screen"
+//    auto sprite = Sprite::create("HelloWorld.png");
+//
+//    // position the sprite on the center of the screen
+//    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+//
+//    // add the sprite as a child to this layer
+//    this->addChild(sprite, 0);
     
 //    auto label = CCLabelTTF::create("Hello World", "Thonburi", 34);
 //    label->setTag(1);
     
     auto buildButton = cocos2d::ui::Button::create("kuang.png","kuang.png","kuang.png");
-//    buildButton->setContentSize(CCSizeMake(100, 50));
     buildButton->setTitleText("建造");
     buildButton->setTitleFontSize(7);
     buildButton->setPosition(Vec2(origin.x+30, visibleSize.height + origin.y - 40));
-//    buildButton->setColor(Color3B::ORANGE);
     buildButton->setTitleColor(Color3B::WHITE);
     buildButton->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
         switch (type)
@@ -71,24 +71,90 @@ bool HelloWorld::init()
     
     this->addChild(buildButton);
     
-//    UserDefault::getInstance()
+
     
-//    auto button = Button::create("","","");
+    resTableView = TableView::create(this, Size(100, 180));
     
+    resTableView->setPosition(Vec2(origin.x+65, visibleSize.height + origin.y - 210));
+    //展開方向
+    resTableView->setDirection(TableView::Direction::VERTICAL);
+    //表示順序上からしたへ
+    resTableView->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
     
-//    auto red = LayerColor::create(Color4B(255, 100, 100, 255), visibleSize.width/2, visibleSize.height/2);
-//    red->ignoreAnchorPointForPosition(false);
-//    red->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
-//    
-//    auto green = LayerColor::create(Color4B(100, 255, 100, 255), visibleSize.width/4, visibleSize.height/4);
-//    green->ignoreAnchorPointForPosition(false);
-//    green->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - 100));
-//    red->setPositionZ(1);
-//    green->setPositionZ(0);
-//    this->addChild(red, 1);
-//    this->addChild(green, 0);
-//    
+    //追加
+    resTableView->setDelegate(this);
+    addChild(resTableView);
+    resTableView->reloadData();
+    
     return true;
+}
+
+
+// セルの大きさを設定する
+Size HelloWorld::cellSizeForTable(TableView *table){
+    return Size(200, 15);
+}
+
+// 1セルに表示させるValueをセット
+TableViewCell* HelloWorld::tableCellAtIndex(TableView *table, ssize_t idx){
+//    std::string id = StringUtils::format("%zd", idx);
+//    std::string text = StringUtils::format("Line %zd", idx);
+    auto resManager = ResourcesManager::getInstance();
+    auto model = resManager->resVec.at(resManager->resVec.size()-1-idx);
+    
+    TableViewCell *cell = table->dequeueCell();
+    
+    cell = new TableViewCell();
+    cell->autorelease();
+    
+    // セルの背景は交互に色を変更する
+//    auto background_color = Color3B(255,255,255);
+//    if (idx%2) {
+//        background_color = Color3B(200,200,200);
+//    }
+    
+    Sprite* bg = Sprite::create();
+    bg->setAnchorPoint(Point(0, 0));
+    bg->setTextureRect(Rect(0, 0, 200, 15));
+    bg->setColor(Color3B(0,0,0));
+    bg->setTag(100);
+    cell->addChild(bg);
+    
+    // ボーダーライン
+    Sprite* line = Sprite::create();
+    line->setAnchorPoint(Point(0, 0));
+    line->setTextureRect(Rect(0, 0, 200, 1));
+    line->setColor(Color3B(0,0,0));
+    cell->addChild(line);
+    
+    // ID部分
+    auto *label_1 = cocos2d::ui::Text::create(model->getName(), "Arial", 7);
+    label_1->setAnchorPoint(Point(0, 0));
+    label_1->setPosition(Point(10, 0));
+    label_1->setColor(Color3B(255,255,255));
+    cell->addChild(label_1);
+    
+    
+//    auto numString = __String::createWithFormat("%d",model->getNum());
+    std::string numText = StringUtils::format("%d", model->getNum());
+    // テキスト部分
+    auto *label_2 = cocos2d::ui::Text::create(numText.c_str(), "Arial", 7);
+    label_2->setAnchorPoint(Point(0, 0));
+    label_2->setPosition(Point(50, 0));
+    label_2->setColor(Color3B(255,255,255));
+    cell->addChild(label_2);
+    
+    return cell;
+}
+
+// セル数
+ssize_t HelloWorld::numberOfCellsInTableView(TableView *table){
+    return ResourcesManager::getInstance()->resVec.size();
+}
+
+// セルがタッチされた時のcallback
+void HelloWorld::tableCellTouched(TableView* table, TableViewCell* cell){
+    CCLOG("%ziのセルがタッチされました", cell->getIdx());
 }
 
 

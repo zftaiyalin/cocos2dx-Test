@@ -19,6 +19,7 @@ private:
     int _num; //建筑数量
     bool _isShow; //是否显示建筑数量
     
+       
 public:
     // 静态的create函数
     static ResourcesModel* create()
@@ -44,6 +45,8 @@ public:
     
     void setIsShow(bool isShow){ _isShow = isShow; }
     bool getIsShow(){ return _isShow; }
+    
+    
     
 };
 #endif /* ResourcesModel_hpp */

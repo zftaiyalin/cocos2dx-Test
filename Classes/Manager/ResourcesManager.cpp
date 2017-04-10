@@ -28,11 +28,7 @@ ResourcesManager* ResourcesManager::getInstance()
     return m_instance;
 }
 
-void ResourcesManager::createResTable(){
-    
-    
-    
-}
+
 
 void ResourcesManager::loadResourcesData()
 {
@@ -70,12 +66,12 @@ void ResourcesManager::loadResourcesData()
             res->setNum(num);
             res->setName(name);
             res->setIsShow(isShow);
-            resVec.pushBack(res);
+//            resVec.pushBack(res);
             sqlManager->addOrUpdateResourcesDataInTable(res);
         }
     
-    
-        auto array = sqlManager->selectResourcesModelList();
+//    cocos2d::Vector<ResourcesModel *> resVec
+        resVec = sqlManager->selectResourcesModelList();
     
     
   

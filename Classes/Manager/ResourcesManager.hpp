@@ -22,7 +22,7 @@ public:
     
     cocos2d::Vector<ResourcesModel *> resVec;
     void loadResourcesData();
-    void createResTable();
+
     
 protected:
     ResourcesManager();

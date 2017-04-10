@@ -5,64 +5,125 @@
                "id": 1111,
                "name": "耕地",
                "productNum": 10,
-               "isShowMaxNum": 0,
-               "num":0,
-               "isShowNum": 1,
-               "grade":1,
-               "isMax":0
+               "isShow": true,
+               "isShowMaxNum": false,
+               "num": 0,
+               "maxProduct": 0,
+               "isShowNum": true,
+               "grade": 1,
+               "isMax": false
                },
                {
                "productTime": 20,
                "id": 1112,
                "name": "采石场",
                "productNum": 10,
-               "isShowMaxNum": 1,
-               "num":0,
-               "isShowNum": 0,
-               "grade":1,
-               "isMax":0
+               "isShow": false,
+               "maxProduct": 0,
+               "isShowMaxNum": true,
+               "num": 0,
+               "isShowNum": false,
+               "grade": 1,
+               "isMax": false
                },
                {
                "productTime": 20,
                "productNum": 10,
-               "isShowNum": 0,
+               "isShowNum": false,
                "id": 1113,
-               "isShowMaxNum": 0,
+               "isShow": false,
+               "maxProduct": 0,
+               "isShowMaxNum": false,
                "name": "磨坊",
-               "num":0,
-               "grade":1,
-               "isMax":1
+               "num": 0,
+               "grade": 1,
+               "isMax": true
                },
                {
                "productTime": 0,
                "productNum": 0,
-               "isShowMaxNum": 0,
-               "isShowNum": 0,
+               "isShowMaxNum": false,
+               "isShowNum": false,
                "id": 1114,
-               "name": "居屋",
-               "num":0,
-               "grade":1,
-               "isMax":1
+               "isShow": false,
+               "maxProduct": 0,
+               "name": "兵营",
+               "num": 0,
+               "grade": 1,
+               "isMax": true
+               },
+               {
+               "productTime": 0,
+               "productNum": 0,
+               "isShowNum": false,
+               "id": 1115,
+               "isShow": false,
+               "isShowMaxNum": false,
+               "maxProduct": 0,
+               "name": "研究院",
+               "num": 0,
+               "grade": 1,
+               "isMax": true,
+               "upNum": 0
                }
                ],
-    "Resources":[
-                 {
-                 "id": 11111,
-                 "name": "人口",
-                 "num":5,
-                 "isShow":true
-                 },
-                 {
-                 "id": 11112,
-                 "name": "小麦",
-                 "num":10,
-                 "isShow":true
-                 },
-                 {
-                 "id": 11113,
-                 "name": "石头",
-                 "num":20,
-                 "isShow":true
-                 }
-                 ]
+    "Resources": [
+                  {
+                  "id": 11110,
+                  "name": "人口",
+                  "num": 5,
+                  "isShow": true
+                  },
+                  {
+                  "id": 11111,
+                  "name": "金币",
+                  "num": 100,
+                  "isShow": true
+                  },
+                  {
+                  "id": 11112,
+                  "name": "小麦",
+                  "num": 10,
+                  "isShow": true
+                  },
+                  {
+                  "id": 11113,
+                  "name": "石头",
+                  "num": 20,
+                  "isShow": true
+                  }
+                  ],
+    "UpBuildRequire": [
+                       {
+                       "upbuildname":"耕地",
+                       "resid": 11110,
+                       "num": 5,
+                       "buildnum":1
+                       },
+                       {
+                       "upbuildname":"耕地",
+                       "resid": 11110,
+                       "num": 10,
+                       "buildnum":2
+                       },
+                       {
+                       "upbuildname":"耕地",
+                       "resid": 11111,
+                       "num": 20,
+                       "buildnum":2
+                       },
+                       {
+                       "upbuildname":"耕地",
+                       "resid": 11110,
+                       "num": 30,
+                       "buildnum":3
+                       },
+                       {
+                       "upbuildname":"耕地",
+                       "resid": 11111,
+                       "num": 50,
+                       "buildnum":3
+                       }
+                       
+                       ]
 }

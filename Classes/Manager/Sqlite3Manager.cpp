@@ -213,7 +213,89 @@ bool GameSqlManager::addOrUpdateResourcesDataInTable(ResourcesModel *model){
     // 解放（忘れてはいけない）
     sqlite3_free(insertSQL);
     
-    this->commitTransactionAndCloseDB(db);
+   return this->commitTransactionAndCloseDB(db);
+}
+
+
+bool GameSqlManager::addOrUpdateBuildDataInTable(BuildModel *model){
+    sqlite3 *db = this->openDBAndStartTransaction();
+    int status = 0;
+    // エラーメッセージ格納用
+    char* errorMessage = NULL;
+//    std::string _name; // 建筑名称
+//    int _productTime;  // 生产周期
+//    int _id; // id
+//    int _grade; //建筑等级
+//    int _num; //建筑数量
+//    int _productNum; //生产周期产量
+//    bool _isMax; //是否可到达最大数量
+//    bool _isShowMaxNum; //是否显示建筑最大开采量
+//    bool _isShowNum; //是否显示建筑数量
+//    bool _isShow;//是否展示在界面
+//    int _,maxProduct;//建筑最大开采量
+    // InsertSQL
+    auto insertSQL = sqlite3_mprintf("insert or replace into ResourcesTable(id,name,num,isShow,isMax,isShowMaxNum,isShowNum,grade,productNum,productTime,maxProduct) values(%d,%Q,%d,%d,%d,%d,%d,%d,%d,%d,%d)",
+                                     model->getId(),model->getName().c_str(),model->getNum(),boolToInt(model->getIsShow()),boolToInt(model->getIsMax()),boolToInt(model->getisShowMaxNum()),boolToInt(model->getIsShowNum()),model->getGrade(),model->getProductNum(),model->getProductTime(),model->getMaxProduct()
+                                     );
+    status = sqlite3_exec(db, insertSQL, nullptr, nullptr, &errorMessage);
+    if(status != SQLITE_OK)
+    {
+        CCLOG("▼Inserting UnitData data failed. Message : %s",errorMessage);
+        CCASSERT(false, errorMessage);
+    }
+    else
+    {
+        CCLOG("○UnitData data successfully updated. no : %d",model->getId());
+    }
+    
+    // 解放（忘れてはいけない）
+    sqlite3_free(insertSQL);
+    
+    return this->commitTransactionAndCloseDB(db);
+    
+}//添加或修改建筑到建筑表格
+
+
+cocos2d::Vector<BuildModel*> GameSqlManager::selectBuildModelList(){
+    Vector<BuildModel*> unitDataList;
+    
+    sqlite3 *db = this->openDB();
+    
+    // Select
+    sqlite3_stmt *stmt = nullptr;
+    auto selectSQL = "select id,name,num,isShow,isMax,isShowMaxNum,isShowNum,grade,productNum,productTime,maxProduct from BuildTable order by id desc";
+    if(sqlite3_prepare_v2(db,selectSQL,-1,&stmt,nullptr) == SQLITE_OK)
+    {
+        while(sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            BuildModel *unitData = BuildModel::create();
+            unitData->setId((int)sqlite3_column_int(stmt, 0));
+            unitData->setName(StringUtils::format("%s",sqlite3_column_text(stmt, 1)));
+            unitData->setNum((int)sqlite3_column_int(stmt, 2));
+            unitData->setIsShow(intToBool((int)sqlite3_column_int(stmt, 3)));
+            unitData->setIsMax(intToBool((int)sqlite3_column_int(stmt, 4)));
+            unitData->setIsShowMaxNum(intToBool((int)sqlite3_column_int(stmt, 5)));
+            unitData->setIsShowNum(intToBool((int)sqlite3_column_int(stmt, 6)));
+            unitData->setGrade((int)sqlite3_column_int(stmt, 7));
+            unitData->setProductNum((int)sqlite3_column_int(stmt, 8));
+            unitData->setProductTime((int)sqlite3_column_int(stmt, 9));
+            unitData->setMaxProduct((int)sqlite3_column_int(stmt, 10));
+            
+            unitDataList.pushBack(unitData);
+        }
+    }
+    else
+    {
+        CCASSERT(false,"Select UnitDataList error.");
+    }
+    
+    // Statementをクローズ
+    sqlite3_reset(stmt);
+    sqlite3_finalize(stmt);
+    
+    this->closeDB(db);
+    
+    return unitDataList;
 }
 
 
