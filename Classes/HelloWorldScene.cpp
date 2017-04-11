@@ -34,8 +34,8 @@ bool HelloWorld::init()
 //    cocos2d::Vector<ResourcesModel *> resVec;
     
 //    cocos2d::Vector<ResourcesModel *> resVec = ResourcesManager::getInstance()->resVec;
-    ResourcesManager::getInstance()->loadResourcesData();
-    BuildManager::getInstance()->loadBuildData();  
+//    ResourcesManager::getInstance()->loadResourcesData();
+//    BuildManager::getInstance()->loadBuildData();  
     
     
     
@@ -84,9 +84,32 @@ bool HelloWorld::init()
     //追加
     resTableView->setDelegate(this);
     addChild(resTableView);
-    resTableView->reloadData();
+    this->reloadResourcesVecs();
+    
+    
+    auto listener = EventListenerCustom::create("reloadResTableView", [=](EventCustom *event){
+        //接受建筑管理类的资源改变时间，刷新tableview;
+        this->reloadResourcesVecs();
+        
+    });
+    
+    _eventDispatcher->addEventListenerWithFixedPriority(listener, 1);
+    
+    
+
     
     return true;
+}
+
+void HelloWorld::reloadResourcesVecs(){
+    resourcesVecs.clear();
+    for (const auto& key: ResourcesManager::getInstance()->resMap.keys()) {
+        ResourcesModel *model = ResourcesManager::getInstance()->resMap.at(key);
+        if (model->getIsShow()) {
+            resourcesVecs.pushBack(model);
+        }
+    }
+    resTableView->reloadData();
 }
 
 
@@ -99,8 +122,8 @@ Size HelloWorld::cellSizeForTable(TableView *table){
 TableViewCell* HelloWorld::tableCellAtIndex(TableView *table, ssize_t idx){
 //    std::string id = StringUtils::format("%zd", idx);
 //    std::string text = StringUtils::format("Line %zd", idx);
-    auto resManager = ResourcesManager::getInstance();
-    auto model = resManager->resVec.at(resManager->resVec.size()-1-idx);
+
+    auto model = resourcesVecs.at(resourcesVecs.size()-1-idx);
     
     TableViewCell *cell = table->dequeueCell();
     
@@ -149,7 +172,7 @@ TableViewCell* HelloWorld::tableCellAtIndex(TableView *table, ssize_t idx){
 
 // セル数
 ssize_t HelloWorld::numberOfCellsInTableView(TableView *table){
-    return ResourcesManager::getInstance()->resVec.size();
+    return resourcesVecs.size();
 }
 
 // セルがタッチされた時のcallback
@@ -159,7 +182,12 @@ void HelloWorld::tableCellTouched(TableView* table, TableViewCell* cell){
 
 
 void HelloWorld::pushBuildScene(){
-    
+    //创建场景HelloWorld场景
+    Scene* scene = BuildScene::createScene();
+    //创建场景切换方式
+//    TransitionScene* ts = TransitionSlideInR::create(1, scene);
+    //切换场景
+    Director::getInstance()->pushScene(scene);
 }
 
 void HelloWorld::menuCloseCallback(Ref* pSender)

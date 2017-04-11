@@ -16,18 +16,26 @@
 #include "BuildManager.hpp"
 #include <extensions/cocos-ext.h>
 #include "BuildScene.hpp"
+#include "HelloWorldScene.h"
 
 USING_NS_CC;
 using namespace extension;
 
 class BuildScene : public cocos2d::Layer,cocos2d::extension::TableViewDataSource,cocos2d::extension::TableViewDelegate
 {
-public:
- 
+private:
+    void reloadBuildVecs();
+    Vector<BuildModel *>buildVecs;
+    void Buildbuilding(int idx);
+    void judgeBuildText(cocos2d::ui::Layout *layout1,BuildModel *model);
 public:
     static cocos2d::Scene* createScene();
     
+    void pushMainScene();
+    
     virtual bool init();
+    
+    
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

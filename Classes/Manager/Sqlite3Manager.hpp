@@ -49,8 +49,8 @@ public:
     bool addOrUpdateBuildDataInTable(BuildModel *model);//添加或修改建筑到建筑表格
 //    bool updateBuildDataInTable(BuildModel *model);//修改建筑表格资源
     
-    cocos2d::Vector<ResourcesModel*> selectResourcesModelList();
-    cocos2d::Vector<BuildModel*> selectBuildModelList();
+    cocos2d::Map<std::string,ResourcesModel*> selectResourcesModelList();
+    cocos2d::Map<std::string,BuildModel*> selectBuildModelList();
     
     void selectTest();
 protected:

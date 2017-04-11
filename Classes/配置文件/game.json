@@ -2,6 +2,7 @@
     "builds": [
                {
                "productTime": 20,
+               "productResId": 11112,
                "id": 1111,
                "name": "耕地",
                "productNum": 10,
@@ -15,6 +16,7 @@
                },
                {
                "productTime": 20,
+               "productResId": 11113,
                "id": 1112,
                "name": "采石场",
                "productNum": 10,
@@ -28,6 +30,7 @@
                },
                {
                "productTime": 20,
+               "productResId": 0,
                "productNum": 10,
                "isShowNum": false,
                "id": 1113,
@@ -42,6 +45,7 @@
                {
                "productTime": 0,
                "productNum": 0,
+               "productResId": 0,
                "isShowMaxNum": false,
                "isShowNum": false,
                "id": 1114,
@@ -55,6 +59,7 @@
                {
                "productTime": 0,
                "productNum": 0,
+               "productResId": 0,
                "isShowNum": false,
                "id": 1115,
                "isShow": false,

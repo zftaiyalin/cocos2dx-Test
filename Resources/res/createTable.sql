@@ -16,6 +16,7 @@ isShowNum integer,
 productNum integer,
 productTime integer,
 maxProduct integer,
+productResId integer,
 grade integer
 );
 

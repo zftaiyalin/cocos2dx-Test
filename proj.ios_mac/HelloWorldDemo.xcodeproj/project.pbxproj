@@ -60,6 +60,11 @@
 		521A8EA919F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
+		6B6CEFAD1E9C7A110015B498 /* buildKuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6CEFA91E9C7A110015B498 /* buildKuang.png */; };
+		6B6CEFAE1E9C7A110015B498 /* buildNum.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6CEFAA1E9C7A110015B498 /* buildNum.png */; };
+		6B6CEFAF1E9C7A110015B498 /* buildGou.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6CEFAB1E9C7A110015B498 /* buildGou.png */; };
+		6B6CEFB01E9C7A110015B498 /* buildyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6CEFAC1E9C7A110015B498 /* buildyou.png */; };
+		6B6CEFB41E9C7B820015B498 /* BuildRequireModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CEFB21E9C7B820015B498 /* BuildRequireModel.cpp */; };
 		6B6FF9D61E97907A00DA0414 /* sqlite3secure.c in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FF9D51E97907A00DA0414 /* sqlite3secure.c */; };
 		6B79717C1E95DFF600A680C9 /* kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B79717B1E95DFF600A680C9 /* kuang.png */; };
 		6B7971801E95E21100A680C9 /* game.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B79717F1E95E21100A680C9 /* game.json */; };
@@ -174,6 +179,12 @@
 		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		6B6CEFA91E9C7A110015B498 /* buildKuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildKuang.png; sourceTree = "<group>"; };
+		6B6CEFAA1E9C7A110015B498 /* buildNum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildNum.png; sourceTree = "<group>"; };
+		6B6CEFAB1E9C7A110015B498 /* buildGou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildGou.png; sourceTree = "<group>"; };
+		6B6CEFAC1E9C7A110015B498 /* buildyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildyou.png; sourceTree = "<group>"; };
+		6B6CEFB21E9C7B820015B498 /* BuildRequireModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuildRequireModel.cpp; sourceTree = "<group>"; };
+		6B6CEFB31E9C7B820015B498 /* BuildRequireModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BuildRequireModel.hpp; sourceTree = "<group>"; };
 		6B6FF9D41E97907A00DA0414 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = ../cocos2d/external/wxsqlite/src/sqlite3.h; sourceTree = "<group>"; };
 		6B6FF9D51E97907A00DA0414 /* sqlite3secure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3secure.c; path = ../cocos2d/external/wxsqlite/src/sqlite3secure.c; sourceTree = "<group>"; };
 		6B79717B1E95DFF600A680C9 /* kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuang.png; sourceTree = "<group>"; };
@@ -338,6 +349,10 @@
 				46880B7719C43A67006E1F66 /* CloseSelected.png */,
 				6B79717B1E95DFF600A680C9 /* kuang.png */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
+				6B6CEFA91E9C7A110015B498 /* buildKuang.png */,
+				6B6CEFAA1E9C7A110015B498 /* buildNum.png */,
+				6B6CEFAB1E9C7A110015B498 /* buildGou.png */,
+				6B6CEFAC1E9C7A110015B498 /* buildyou.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -438,6 +453,8 @@
 				6B7971B81E9637FD00A680C9 /* BuildModel.hpp */,
 				6B7971BA1E96413800A680C9 /* ResourcesModel.cpp */,
 				6B7971BB1E96413800A680C9 /* ResourcesModel.hpp */,
+				6B6CEFB21E9C7B820015B498 /* BuildRequireModel.cpp */,
+				6B6CEFB31E9C7B820015B498 /* BuildRequireModel.hpp */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -572,11 +589,13 @@
 			files = (
 				6B7971801E95E21100A680C9 /* game.json in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				6B6CEFAF1E9C7A110015B498 /* buildGou.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
+				6B6CEFAD1E9C7A110015B498 /* buildKuang.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
@@ -588,6 +607,8 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
+				6B6CEFAE1E9C7A110015B498 /* buildNum.png in Resources */,
+				6B6CEFB01E9C7A110015B498 /* buildyou.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				6B79717C1E95DFF600A680C9 /* kuang.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -622,6 +643,7 @@
 				6B7971B91E9637FD00A680C9 /* BuildModel.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				6B6CEFB41E9C7B820015B498 /* BuildRequireModel.cpp in Sources */,
 				6B7971881E960F6300A680C9 /* FarmLand.cpp in Sources */,
 				6B7971991E96147000A680C9 /* ResourcesManager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,

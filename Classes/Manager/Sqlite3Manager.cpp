@@ -147,9 +147,9 @@ void GameSqlManager::createTable()
 
 //// データを検索する
 
-Vector<ResourcesModel*> GameSqlManager::selectResourcesModelList()
+Map<std::string,ResourcesModel*> GameSqlManager::selectResourcesModelList()
 {
-    Vector<ResourcesModel*> unitDataList;
+    Map<std::string,ResourcesModel*> unitDataList;
     
     sqlite3 *db = this->openDB();
     
@@ -166,7 +166,7 @@ Vector<ResourcesModel*> GameSqlManager::selectResourcesModelList()
             unitData->setNum((int)sqlite3_column_int(stmt, 2));
             unitData->setIsShow(intToBool((int)sqlite3_column_int(stmt, 3)));
             
-            unitDataList.pushBack(unitData);
+            unitDataList.insert(StringUtils::format("%d", unitData->getId()), unitData);
         }
     }
     else
@@ -234,8 +234,8 @@ bool GameSqlManager::addOrUpdateBuildDataInTable(BuildModel *model){
 //    bool _isShow;//是否展示在界面
 //    int _,maxProduct;//建筑最大开采量
     // InsertSQL
-    auto insertSQL = sqlite3_mprintf("insert or replace into ResourcesTable(id,name,num,isShow,isMax,isShowMaxNum,isShowNum,grade,productNum,productTime,maxProduct) values(%d,%Q,%d,%d,%d,%d,%d,%d,%d,%d,%d)",
-                                     model->getId(),model->getName().c_str(),model->getNum(),boolToInt(model->getIsShow()),boolToInt(model->getIsMax()),boolToInt(model->getisShowMaxNum()),boolToInt(model->getIsShowNum()),model->getGrade(),model->getProductNum(),model->getProductTime(),model->getMaxProduct()
+    auto insertSQL = sqlite3_mprintf("insert or replace into BuildTable(id,name,num,isShow,isMax,isShowMaxNum,isShowNum,grade,productNum,productTime,maxProduct,productResId) values(%d,%Q,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d)",
+                                     model->getId(),model->getName().c_str(),model->getNum(),boolToInt(model->getIsShow()),boolToInt(model->getIsMax()),boolToInt(model->getisShowMaxNum()),boolToInt(model->getIsShowNum()),model->getGrade(),model->getProductNum(),model->getProductTime(),model->getMaxProduct(),model->getProductResId()
                                      );
     status = sqlite3_exec(db, insertSQL, nullptr, nullptr, &errorMessage);
     if(status != SQLITE_OK)
@@ -256,14 +256,14 @@ bool GameSqlManager::addOrUpdateBuildDataInTable(BuildModel *model){
 }//添加或修改建筑到建筑表格
 
 
-cocos2d::Vector<BuildModel*> GameSqlManager::selectBuildModelList(){
-    Vector<BuildModel*> unitDataList;
+Map<std::string,BuildModel*> GameSqlManager::selectBuildModelList(){
+    Map<std::string,BuildModel*> unitDataList;
     
     sqlite3 *db = this->openDB();
     
     // Select
     sqlite3_stmt *stmt = nullptr;
-    auto selectSQL = "select id,name,num,isShow,isMax,isShowMaxNum,isShowNum,grade,productNum,productTime,maxProduct from BuildTable order by id desc";
+    auto selectSQL = "select id,name,num,isShow,isMax,isShowMaxNum,isShowNum,grade,productNum,productTime,maxProduct,productResId from BuildTable order by id desc";
     if(sqlite3_prepare_v2(db,selectSQL,-1,&stmt,nullptr) == SQLITE_OK)
     {
         while(sqlite3_step(stmt) == SQLITE_ROW)
@@ -280,8 +280,9 @@ cocos2d::Vector<BuildModel*> GameSqlManager::selectBuildModelList(){
             unitData->setProductNum((int)sqlite3_column_int(stmt, 8));
             unitData->setProductTime((int)sqlite3_column_int(stmt, 9));
             unitData->setMaxProduct((int)sqlite3_column_int(stmt, 10));
+            unitData->setProductResId((int)sqlite3_column_int(stmt, 11));
             
-            unitDataList.pushBack(unitData);
+            unitDataList.insert(StringUtils::format("%d", unitData->getId()), unitData);
         }
     }
     else

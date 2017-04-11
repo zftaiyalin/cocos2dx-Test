@@ -82,6 +82,8 @@ private:
     bool _isShowNum; //是否显示建筑数量
     bool _isShow;//是否展示在界面
     int _maxProduct;//建筑最大开采量
+    int _productResId;//建筑产出资源ID
+    
 //    cocos2d::Vector<RequireNumModel *> _upNums;
     
 public:
@@ -121,6 +123,9 @@ public:
     
     void setProductNum(int productTimeNum){ _productNum = productTimeNum; }
     int getProductNum(){ return _productNum; }
+    
+    void setProductResId(int productTimeNum){ _productResId = productTimeNum; }
+    int getProductResId(){ return _productResId; }
     
     void setIsShowMaxNum(bool isShowMaxNum){ _isShowMaxNum = isShowMaxNum; }
     bool getisShowMaxNum(){ return _isShowMaxNum; }

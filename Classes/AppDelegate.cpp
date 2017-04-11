@@ -37,6 +37,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
+    ResourcesManager::getInstance();
+    BuildManager::getInstance();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         glview = GLViewImpl::createWithRect("HelloWorldDemo", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));

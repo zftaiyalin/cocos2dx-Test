@@ -6,6 +6,7 @@
 #include "ResourcesModel.hpp"
 #include "ResourcesManager.hpp"
 #include "BuildManager.hpp"
+#include "BuildScene.hpp"
 #include <extensions/cocos-ext.h>
 
 USING_NS_CC;
@@ -13,9 +14,13 @@ using namespace extension;
 
 class HelloWorld : public cocos2d::Layer,cocos2d::extension::TableViewDataSource,cocos2d::extension::TableViewDelegate
 {
+    
+private:
+    void reloadResourcesVecs();
+    Vector<ResourcesModel *>resourcesVecs;
 public:
     static cocos2d::Scene* createScene();
-
+    
     virtual bool init();
     
     // a selector callback

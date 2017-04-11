@@ -15,14 +15,13 @@
 #include <json/document.h>
 #include "Sqlite3Manager.hpp"
 
-class ResourcesManager : public cocos2d::Ref
+class ResourcesManager : public cocos2d::Node
 {
 public:
     static ResourcesManager* getInstance();
     
-    cocos2d::Vector<ResourcesModel *> resVec;
     void loadResourcesData();
-
+    cocos2d::Map<std::string, ResourcesModel *> resMap;
     
 protected:
     ResourcesManager();
@@ -31,6 +30,8 @@ protected:
     
     
 private:
+    
+    void reloadResourcesNum();
     
 //    static bool createXMLFile();
 //    static void initXMLFilePath();

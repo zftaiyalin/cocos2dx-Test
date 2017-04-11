@@ -23,34 +23,39 @@ ResourcesManager* ResourcesManager::getInstance()
     if (! m_instance)
     {
         m_instance = new (std::nothrow) ResourcesManager();
+        m_instance->loadResourcesData();
     }
 
     return m_instance;
 }
 
+void ResourcesManager::reloadResourcesNum(){
 
+}
 
 void ResourcesManager::loadResourcesData()
 {
     
 
-//    bool isLoadJson = cocos2d::UserDefault::getInstance()->getBoolForKey("isLoadRes");
-//    
-//    if (!isLoadJson) {
+    bool isLoadJson = cocos2d::UserDefault::getInstance()->getBoolForKey("isLoadRes");
+    auto sqlManager = GameSqlManager::getInstance();
     
-//        GameSqlManager->getInstance()::createResTable();
+    //读取JSON配置数据，建立表格数据，把数据存入数据库
+    rapidjson::Document document;
     
-        auto sqlManager = GameSqlManager::getInstance();
+    std::string filePath = cocos2d::FileUtils::getInstance()->fullPathForFilename(cocos2d::StringUtils::format("game.json"));
+    std::string contentStr = cocos2d::FileUtils::getInstance()->getStringFromFile(filePath);
+    document.Parse<0>(contentStr.c_str());
+    
+    if (!isLoadJson) {
+    
+    
+        
         sqlManager->createTable();
     
         cocos2d::UserDefault::getInstance()->setBoolForKey("isLoadRes", true);
         
-        //读取JSON配置数据，建立表格数据，把数据存入数据库
-        rapidjson::Document document;
         
-        std::string filePath = cocos2d::FileUtils::getInstance()->fullPathForFilename(cocos2d::StringUtils::format("game.json"));
-        std::string contentStr = cocos2d::FileUtils::getInstance()->getStringFromFile(filePath);
-        document.Parse<0>(contentStr.c_str());
         
         //获取资源数据
         const rapidjson::Value& resArray = document["Resources"];
@@ -66,16 +71,11 @@ void ResourcesManager::loadResourcesData()
             res->setNum(num);
             res->setName(name);
             res->setIsShow(isShow);
-//            resVec.pushBack(res);
             sqlManager->addOrUpdateResourcesDataInTable(res);
         }
+    }
     
-//    cocos2d::Vector<ResourcesModel *> resVec
-        resVec = sqlManager->selectResourcesModelList();
+
+    resMap = sqlManager->selectResourcesModelList();
     
-    
-  
-//    }else{
-//        //直接读取数据库数据
-//    }
 }
